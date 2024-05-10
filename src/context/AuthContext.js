@@ -27,6 +27,18 @@ export const AuthProvider = ({children}) => {
       errorToast(`${error}`)
     }
   }
+
+  const getProperty = async () => {
+    try {
+      const response = await Request.get(`properties`);
+      return response.data;
+    } catch (error) {
+      errorToast(`${error}`)
+      console.error('Failed to fetch all properties:', error);
+      //throw error;
+    }
+  };
+
   const login = async (email,password) => {
     
     if (email == "") {
@@ -122,7 +134,7 @@ export const AuthProvider = ({children}) => {
   return (
     <AuthContext.Provider
       value={{
-    
+        getProperty,
         login,
         logout,
         isLoading,

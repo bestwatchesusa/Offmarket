@@ -1,3 +1,4 @@
+
 module.exports = {
   mode: "jit",
   content: ["./src/**/**/*.{js,ts,jsx,tsx,html,mdx}", "./src/**/*.{js,ts,jsx,tsx,html,mdx}"],
@@ -28,5 +29,6 @@ module.exports = {
       fontFamily: { manrope: "Manrope", markoone: "Marko One" },
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [require("@tailwindcss/forms"),require("@material-tailwind/react/utils/withMT")],
 };
+

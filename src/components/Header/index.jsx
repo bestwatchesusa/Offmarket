@@ -19,7 +19,7 @@ export default function Header({ ...props }) {
           <Img src={deal} alt="Best Off Market Deal" className="h-[60px] w-[80px]" />
           {/* <Text size="md" as="p" className="mt-[5px] !text-orange-A700 !font-markoone">
             Best Off Market Deal
-          </Text> */}
+          </Text> */} 
         </div>
         <div className="flex flex-row sm:flex-col justify-between items-center w-[59%] md:w-full sm:gap-10">
           <div className="flex flex-row w-[94%] sm:w-full gap-10" >
