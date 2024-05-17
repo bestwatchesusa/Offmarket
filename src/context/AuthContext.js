@@ -9,6 +9,18 @@ export const AuthProvider = ({children}) => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({}); 
   const [isLoading, setIsLoading] = useState(false);
+
+
+  const getUser = async () => {
+    try {
+      let user_id = localStorage.getItem('user');
+      const response = await Request.get(`users/${user_id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Failed to fetch all users:', error);
+      throw error;
+    }
+  };
   const Signup = async (data) => {
     setIsLoading(true)
     try {
@@ -18,7 +30,7 @@ export const AuthProvider = ({children}) => {
         setTimeout(() => {
           setIsLoading(false);
          }, 2000)
-         navigate('/')
+         navigate('/login')
         return response.data;
       }
     } catch (error) {
@@ -34,7 +46,48 @@ export const AuthProvider = ({children}) => {
       return response.data;
     } catch (error) {
       errorToast(`${error}`)
-      console.error('Failed to fetch all properties:', error);
+      console.log('Failed to fetch all properties:', error);
+      //throw error;
+    }
+  };
+
+  const getResidential = async () => {
+    try {
+      const response = await Request.get(`properties/residential`);
+      return response.data;
+    } catch (error) {
+      errorToast(`${error}`)
+      console.error('Failed to fetch all residential:', error);
+      //throw error;
+    }
+  };
+  const getMultifamily = async () => {
+    try {
+      const response = await Request.get(`properties/multi-family`);
+      return response.data;
+    } catch (error) {
+      errorToast(`${error}`)
+      console.error('Failed to fetch all multi-family:', error);
+      //throw error;
+    }
+  };
+  const getSubdeals = async () => {
+    try {
+      const response = await Request.get(`properties/sub-to-deals`);
+      return response.data;
+    } catch (error) {
+      errorToast(`${error}`)
+      console.error('Failed to fetch all sub-to-deals:', error);
+      //throw error;
+    }
+  };
+  const getSellerfinance = async () => {
+    try {
+      const response = await Request.get(`properties/seller-finance`);
+      return response.data;
+    } catch (error) {
+      errorToast(`${error}`)
+      console.error('Failed to fetch all seller-finance:', error);
       //throw error;
     }
   };
@@ -65,7 +118,7 @@ export const AuthProvider = ({children}) => {
         setTimeout(() => {
        
           successToast("Login Successful");
-    
+          localStorage.setItem('userdetail', userInfo);
             setIsLoading(false);
             document.cookie = `session_id=${sessionId}; path=/; max-age=${60 *  60 *  24 *  7}`
             document.cookie = `id=${userInfo.id}; path=/; max-age=${60 *  60 *  24 *  7}`
@@ -138,7 +191,13 @@ export const AuthProvider = ({children}) => {
         login,
         logout,
         isLoading,
-        Signup
+        Signup,
+        getUser,
+        getResidential,
+        getMultifamily,
+        getSubdeals,
+        getSellerfinance,
+
       }}>
       {children}
     </AuthContext.Provider>

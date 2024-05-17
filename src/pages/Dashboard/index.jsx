@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect ,useContext} from 'react';
 
 import { Helmet } from "react-helmet";
 import { Img, Heading, TextArea, Radio, RadioGroup, Text, RatingBar, GoogleMap } from "../../components";
@@ -13,9 +13,33 @@ import { Button, Upload ,Col,Typography, Row } from 'antd';
 import TextField from "@mui/material/TextField";
 import Box from '@mui/material/Box';
 import { Breadcrumb } from 'antd';
-
+import { AuthContext } from '../../context/AuthContext';
+import deal from "../../assets/images/user.png";
 export default function PropertyDetailsPage() {
- 
+  const { getUser} = useContext(AuthContext);
+  const [user, setData] = useState([]);
+
+  const [first_name, setFirstname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone_number, setPhone] = useState("");
+  const [last_name, setLastname] = useState("");
+  
+
+
+  useEffect(() => {
+    getUser()
+  .then((data) => {
+    console.log('Dat',data)
+    //const info = data.filter(i => i.tasks.length =0 );
+    setFirstname(data.first_name)
+    setLastname(data.last_name)
+    setEmail(data.email)
+    setPhone(data.phone_number)
+    
+  
+  })
+  .catch((error) => console.log('Error fetching all services:', error))
+}, []);
   return (
     <>
       <Helmet>
@@ -70,31 +94,40 @@ export default function PropertyDetailsPage() {
               <div className="flex flex-col items-center justify-start w-[32%] sm:w-full gap-10 p-[23px] sm:p-5 border-blue_gray-100_01 border border-solid bg-white-A700 rounded-[10px]">
                  
                   <div style={{height:'200px'}} className="flex flex-col items-start justify-start w-full pt-[3px] gap-[19px]">
-                 
+                 <Img src={deal} style={{height:'170px',width:'170px', margin:'auto'}}/>
                   </div>
-                  <Upload action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload" directory>
+                  {/* <Upload action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload" directory>
     <Button icon={<UploadOutlined />}>Upload Photo</Button>
-  </Upload>
-  <Text as="p" style={{fontSize:14, color:'black'}}>
-                       Image size should be under 1MB and image ration needs to be 1:1
-                     
+  </Upload> */}
+   <div style={{height:'60px', marginTop:'-40px'}} className="flex flex-col items-start justify-start w-full pt-[3px] gap-[19px]">
+   <Text as="p" style={{fontSize:14, color:'black',margin:'auto'}}>
+                       {/* Image size should be under 1MB and image ration needs to be 1:1 */}
+                       🏠 Welcome Back! 🎉
                       </Text>
+                      
+                       <Heading as="h1"   style={{color:'black',fontWeight:"500px", fontSize:25, margin:'auto'}}>
+                {first_name} {last_name}
+                <br/>
+                </Heading>
+               
+                  </div>
+  
                 </div>
                 
                 
                 <div className="flex flex-col items-center justify-start w-[66%] md:w-full gap-6">
                   <div className="flex flex-col items-center justify-start w-full gap-14 p-[39px] sm:p-5 border-blue_gray-100_01  bg-white-A700 rounded-[10px]">
                     <div className="flex flex-col items-start justify-start w-full gap-[22px]">
-                      <div className="flex flex-col items-start justify-start w-full gap-[17px]">
+                     
+                   
+                      <div  className="flex flex-col items-start justify-start w-full gap-[17px]">
                     
-
-
 
                         <div className="flex flex-col items-center justify-start w-full">
               <div className="flex flex-row md:flex-col justify-start items-start w-full gap-6 md:gap-5 md:px-5 max-w-[1200px]">
               
               <div style={{marginTop:'-80px'}} className="flex flex-col  justify-start w-[45%] sm:w-full gap-10 p-[23px] sm:p-5  bg-white-A700 rounded-[10px]">
-              <Typography >First Name</Typography>
+              <Typography >First Name </Typography>
               <TextField
             
             style={{ marginTop:'-30px',}}
@@ -103,7 +136,7 @@ export default function PropertyDetailsPage() {
             name="Buyer Name"
             placeholder="First Name"
            
-
+value={first_name}
 
 
           />
@@ -118,7 +151,7 @@ export default function PropertyDetailsPage() {
 
             name="Buyer Name"
             placeholder="Last Name"
-           
+           value={last_name}
 
           />
                  
@@ -142,7 +175,7 @@ export default function PropertyDetailsPage() {
             name="Buyer Name"
             placeholder="Email Address"
            
-
+value={email}
 
 
           />
@@ -160,7 +193,7 @@ export default function PropertyDetailsPage() {
             name="Buyer Name"
             placeholder="Phone Number"
            
-           
+           value={phone_number}
 
           />
                  
@@ -218,19 +251,19 @@ export default function PropertyDetailsPage() {
                       
                        
                       </div>
-                     
+                    
                     </div>
 
-                    
-                    <div className="flex flex-col items-start justify-start w-full gap-[17px]">
+                    <div className="flex flex-col items-left justify-start w-full gap-[17px]"style={{}}>
+                    {/* <div className="flex flex-col items-start justify-start w-full gap-[17px]"> */}
                     <Heading size="3xl" as="h3" className="tracking-[-0.56px]">
                           Change Password
                         </Heading>
                     
-                    </div>
+                    {/* </div> */}
                     
                  
-                    <div style={{marginTop:'-40px'}} className="flex flex-col  justify-start w-[45%] sm:w-full gap-10 p-[23px] sm:p-5  bg-white-A700 rounded-[10px]">
+                    <div style={{marginTop:'-15px'}} className="flex flex-col  justify-start w-[45%] sm:w-full gap-10 p-[23px] sm:p-5  bg-white-A700 rounded-[10px]">
               <Typography >Old Password</Typography>
               <TextField
             
@@ -246,7 +279,7 @@ export default function PropertyDetailsPage() {
                  </div>
 
 
-                 <div style={{marginTop:'-70px'}} className="flex flex-col  justify-start w-[45%] sm:w-full gap-10 p-[23px] sm:p-5  bg-white-A700 rounded-[10px]">
+                 <div style={{marginTop:'-50px'}} className="flex flex-col  justify-start w-[45%] sm:w-full gap-10 p-[23px] sm:p-5  bg-white-A700 rounded-[10px]">
               <Typography >New Password</Typography>
               <TextField
             
@@ -261,7 +294,7 @@ export default function PropertyDetailsPage() {
                  
                  </div>
 
-                 <div style={{marginTop:'-70px'}} className="flex flex-col  justify-start w-[45%] sm:w-full gap-10 p-[23px] sm:p-5  bg-white-A700 rounded-[10px]">
+                 <div style={{marginTop:'-50px'}} className="flex flex-col  justify-start w-[45%] sm:w-full gap-10 p-[23px] sm:p-5  bg-white-A700 rounded-[10px]">
               <Typography >Confirm Password</Typography>
               <TextField
             
@@ -282,6 +315,7 @@ export default function PropertyDetailsPage() {
                  <Button size="2xl" shape="round" style={{background:'#008080', color:'#ffff'}} className="w-full sm:px-5 font-semibold">
                     Save Changes
                   </Button> 
+                 </div>
                  </div>
                   </div>
                   

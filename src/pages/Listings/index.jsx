@@ -90,7 +90,7 @@ amazing property
                   console.log(datas.Price,"Goal")
                   return (
 
-                    <Link to={'/propertydetails'} key={i}>
+                    <Link to={`/propertydetails/${datas.id}`} key={i}>
                     <Img
                       src='images/img_image_5.png'
                       alt="image_one"
@@ -133,8 +133,8 @@ amazing property
                           <div className="flex flex-row justify-between w-full">
                             <div className="flex flex-row justify-start items-center gap-3">
                               {/* <Img src="images/img_icon_gray_700.svg" alt="3_bed_room_one" className="h-[20px] w-[20px]" /> */}
-                              <Heading as="h2" className="!text-gray-700">
-                              37 Elm Drive, Nashville, TN 
+                              <Heading as="h4" style={{fontSize:'14px'}}>
+                            {datas.Address} 
                               </Heading>
                             </div>
                             <div className="flex flex-row justify-start items-center gap-3">

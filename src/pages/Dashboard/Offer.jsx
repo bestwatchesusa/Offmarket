@@ -1,7 +1,14 @@
 import React,{ useState, useContext,useEffect } from 'react';
 import { Modal } from 'antd';
 import { AuthContext } from '../../context/AuthContext';
-
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
 import { Breadcrumb } from 'antd';
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -11,9 +18,253 @@ import Header from "../../components/Header4";
 import LandingPageCard from "../../components/LandingPageCard";
 import { HeartFilled } from '@ant-design/icons';
 import BgSky from "../../assets/images/Mask.png";
+import {  Col,Typography, Row } from 'antd';
+const columns = [
+  { id: 'Properties', label: 'PROPERTIES', minWidth: 170 },
+  { id: 'PRICE', label: 'PRICE', minWidth: 100 },
+  {
+    id: 'OFFERED',
+    label: 'OFFERED AMOUNT',
+    minWidth: 170,
+    align: 'right',
+    format: (value) => value.toLocaleString('en-US'),
+  },
 
 
+ 
+];
+
+function createData(Properties, PRICE, OFFERED) {
+  // const density = population / size;
+  return { Properties, PRICE, OFFERED};
+}
+
+const rows = [
+  createData(<> <div className="flex flex-row justify-between items-center w-full pr-[47px] md:pr-5">
+    <div className="flex flex-row md:flex-col justify-start w-full gap-2.5 md:gap-5">
+      <img src='https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg?auto=compress&cs=tinysrgb&w=600' width={100} height={100} style={{ borderRadius: '5px' }} />
+      <div style={{ textAlign: 'left' }} className="flex flex-col items-left justify-start w-full gap-[8px]">
+        <Heading as="h1">
+          Bluebell Bungalow
+        </Heading>
+        <Heading as="h2" className="!text-gray-700">
+          37 Elm Drive, Nashville, TN
+        </Heading>
+        <div className="flex flex-row justify-start items-center w-full gap-2" >
+          <Button
+            color="blue_gray_100"
+            size="sm"
+            variant="outline"
+            shape="round"
+            leftIcon={<Img src="images/img_icon_gray_700.svg" alt="icon / 16px / close" />}
+            className="gap-2 font-semibold min-w-[90px] w-[12px]"
+            style={{ width: 5, fontSize: 10 }}
+          >
+            3-Bedrooms
+          </Button>
+          <Button
+            color="blue_gray_100"
+            size="sm"
+            variant="outline"
+            shape="round"
+            leftIcon={<Img src="images/img_icon_gray_700_20x20.svg" alt="icon / 16px / close" />}
+            className="gap-2 font-semibold min-w-[100px] w-[12px]"
+            style={{ width: 5, fontSize: 10 }}
+          >
+            3-Bathrooms
+          </Button>
+
+          <Button
+            color="blue_gray_100"
+            size="sm"
+            variant="outline"
+            shape="round"
+            leftIcon={<Img src="images/img_icon_gray_700.svg" alt="icon / 16px / close" />}
+            className="gap-2 font-semibold min-w-[70px] w-[12px]"
+            style={{ width: 5, fontSize: 10 }}
+          >
+            3-Sqr.
+          </Button>
+          <Button
+            color="blue_gray_100"
+            size="sm"
+            variant="outline"
+            shape="round"
+            leftIcon={<Img src="images/img_icon_gray_700_20x20.svg" alt="icon / 16px / close" />}
+            className="gap-2 font-semibold min-w-[65px] w-[12px]"
+            style={{ width: 5, fontSize: 10 }}
+          >
+            3-Suite
+          </Button>
+        </div>
+      </div>
+
+
+      <div>
+
+      </div>
+
+
+    </div>
+
+
+  </div></>,
+    '$100,000 ', '$100,000'),
+
+    createData(<> <div className="flex flex-row justify-between items-center w-full pr-[47px] md:pr-5">
+    <div className="flex flex-row md:flex-col justify-start w-full gap-2.5 md:gap-5">
+      <img src='https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg?auto=compress&cs=tinysrgb&w=600' width={100} height={100} style={{ borderRadius: '5px' }} />
+      <div style={{ textAlign: 'left' }} className="flex flex-col items-left justify-start w-full gap-[8px]">
+        <Heading as="h1">
+          Bluebell Bungalow
+        </Heading>
+        <Heading as="h2" className="!text-gray-700">
+          37 Elm Drive, Nashville, TN
+        </Heading>
+        <div className="flex flex-row justify-start items-center w-full gap-2" >
+          <Button
+            color="blue_gray_100"
+            size="sm"
+            variant="outline"
+            shape="round"
+            leftIcon={<Img src="images/img_icon_gray_700.svg" alt="icon / 16px / close" />}
+            className="gap-2 font-semibold min-w-[90px] w-[12px]"
+            style={{ width: 5, fontSize: 10 }}
+          >
+            3-Bedrooms
+          </Button>
+          <Button
+            color="blue_gray_100"
+            size="sm"
+            variant="outline"
+            shape="round"
+            leftIcon={<Img src="images/img_icon_gray_700_20x20.svg" alt="icon / 16px / close" />}
+            className="gap-2 font-semibold min-w-[100px] w-[12px]"
+            style={{ width: 5, fontSize: 10 }}
+          >
+            3-Bathrooms
+          </Button>
+
+          <Button
+            color="blue_gray_100"
+            size="sm"
+            variant="outline"
+            shape="round"
+            leftIcon={<Img src="images/img_icon_gray_700.svg" alt="icon / 16px / close" />}
+            className="gap-2 font-semibold min-w-[70px] w-[12px]"
+            style={{ width: 5, fontSize: 10 }}
+          >
+            3-Sqr.
+          </Button>
+          <Button
+            color="blue_gray_100"
+            size="sm"
+            variant="outline"
+            shape="round"
+            leftIcon={<Img src="images/img_icon_gray_700_20x20.svg" alt="icon / 16px / close" />}
+            className="gap-2 font-semibold min-w-[65px] w-[12px]"
+            style={{ width: 5, fontSize: 10 }}
+          >
+            3-Suite
+          </Button>
+        </div>
+      </div>
+
+
+      <div>
+
+      </div>
+
+
+    </div>
+
+
+  </div></>,
+    '$100,000 ', '$100,000'),
+    createData(<> <div className="flex flex-row justify-between items-center w-full pr-[47px] md:pr-5">
+    <div className="flex flex-row md:flex-col justify-start w-full gap-2.5 md:gap-5">
+      <img src='https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg?auto=compress&cs=tinysrgb&w=600' width={100} height={100} style={{ borderRadius: '5px' }} />
+      <div style={{ textAlign: 'left' }} className="flex flex-col items-left justify-start w-full gap-[8px]">
+        <Heading as="h1">
+          Bluebell Bungalow
+        </Heading>
+        <Heading as="h2" className="!text-gray-700">
+          37 Elm Drive, Nashville, TN
+        </Heading>
+        <div className="flex flex-row justify-start items-center w-full gap-2" >
+          <Button
+            color="blue_gray_100"
+            size="sm"
+            variant="outline"
+            shape="round"
+            leftIcon={<Img src="images/img_icon_gray_700.svg" alt="icon / 16px / close" />}
+            className="gap-2 font-semibold min-w-[90px] w-[12px]"
+            style={{ width: 5, fontSize: 10 }}
+          >
+            3-Bedrooms
+          </Button>
+          <Button
+            color="blue_gray_100"
+            size="sm"
+            variant="outline"
+            shape="round"
+            leftIcon={<Img src="images/img_icon_gray_700_20x20.svg" alt="icon / 16px / close" />}
+            className="gap-2 font-semibold min-w-[100px] w-[12px]"
+            style={{ width: 5, fontSize: 10 }}
+          >
+            3-Bathrooms
+          </Button>
+
+          <Button
+            color="blue_gray_100"
+            size="sm"
+            variant="outline"
+            shape="round"
+            leftIcon={<Img src="images/img_icon_gray_700.svg" alt="icon / 16px / close" />}
+            className="gap-2 font-semibold min-w-[70px] w-[12px]"
+            style={{ width: 5, fontSize: 10 }}
+          >
+            3-Sqr.
+          </Button>
+          <Button
+            color="blue_gray_100"
+            size="sm"
+            variant="outline"
+            shape="round"
+            leftIcon={<Img src="images/img_icon_gray_700_20x20.svg" alt="icon / 16px / close" />}
+            className="gap-2 font-semibold min-w-[65px] w-[12px]"
+            style={{ width: 5, fontSize: 10 }}
+          >
+            3-Suite
+          </Button>
+        </div>
+      </div>
+
+
+      <div>
+
+      </div>
+
+
+    </div>
+
+
+  </div></>,
+    '$100,000 ', '$100,000'),
+];
 export default function PropertyDetailsPage() {
+
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
     const [payments, setPayment] = useState([]);
 
   
@@ -69,144 +320,59 @@ export default function PropertyDetailsPage() {
              
               <div className="flex flex-row md:flex-col w-full gap-6">
 
-              {
-                payments.map((datas, i) => {
-                  console.log(datas.Price,"Goal")
-                  return (
-<div className="flex flex-col items-center justify-start w-[32%] md:w-full">
-                    <Link to={'/propertydetails'} key={i}>
-                    <Img
-                      src='images/img_image_3.png'
-                      alt="image_one"
-                      className="w-full md:h-auto sm:w-full rounded-tr-[10px] rounded-tl-[10px] object-cover"
-                    />
-                    <div className="flex flex-row justify-center w-full p-[19px] rounded-bl-[10px] rounded-br-[10px] border-red-100_01 border border-solid bg-gray-50_01">
-                      <div className="flex flex-col items-center justify-start w-full gap-[25px] my-2.5 md:px-5 max-w-[344px]">
-                        <div className="flex flex-row justify-start items-center w-full gap-3 ">
-                          <div className="absolute">
-                          {/* <Img src="images/img_icon_map_2.svg" alt="image_two" className="h-[24px] w-[24px] " /> */}
-                          <Button
-                                    color="white_A700"
-                                    size="lg"
-                                    shape="round"
-                                 
-                                    className="gap-1.5 -top-[130px] left-[5px] m-auto text-gray-900 font-bold min-w-[122px] absolute"
-                                  >
-                                     {/* {price} */}
-                                     {datas.Price}
-                                  </Button>
-                                  <Button
-                                    color="white_A700"
-                                    size="lg"
-                                    shape="round"
-                                    leftIcon={<Img src="images/icons8-power-50.png" alt="icon - image" style={{width:18}}/>}
-                                    className="gap-1.5 -top-[260px] left-[5px] m-auto text-gray-900 font-bold min-w-[122px] absolute"
-                                  style={{background:'#008080',color:'#fff',fontSize:'12px'}}
-                                  >
-                                    FEATURED
-                                  </Button>
-                          </div>
-                         
-                          <Heading as="h1">
-                            {/* {p286162ndave} */}
-                            {datas.Title}
-                          </Heading>
-                      
-                        </div>
-                        <div className="flex flex-col items-center justify-start w-full gap-[19px]">
-                          <div className="flex flex-row justify-between w-full">
-                            <div className="flex flex-row justify-start items-center gap-3">
-                              {/* <Img src="images/img_icon_gray_700.svg" alt="3_bed_room_one" className="h-[20px] w-[20px]" /> */}
-                              <Heading as="h2" className="!text-gray-700">
-                              37 Elm Drive, Nashville, TN 
-                              </Heading>
-                            </div>
-                            <div className="flex flex-row justify-start items-center gap-3">
-                              <Img src="images/icons8-share-64.png" alt="1_bath_one" className="h-[20px] w-[20px]" />
-                              {/* <Img src="images/icons8-heart-50.png" alt="1_bath_one" className="h-[20px] w-[20px]" /> */}
-                              <HeartFilled  style={{color:'red'}} className="h-[20px] w-[20px]" />
-                            </div>
-                          </div>
-                          {/* <div className="flex flex-row justify-between w-full">
-                            <div className="flex flex-row justify-start items-center gap-3">
-                              <Img src="images/img_icon_20x20.svg" alt="1032_sqft_one" className="h-[20px] w-[20px]" />
-                              <Heading as="h4" className="!text-gray-700">
-                                {sqftcounter}
-                              </Heading>
-                            </div>
-                            <div className="flex flex-row justify-start items-center gap-3">
-                              <Img src="images/img_iocn_menu.svg" alt="family_one" className="h-[20px] w-[20px]" />
-                              <Heading as="h5" className="!text-gray-700">
-                                {p1bath}
-                              </Heading>
-                            </div>
-                          </div> */}
-                        </div>
-              
-                        <div className="flex flex-row justify-between items-center w-full pr-[47px] md:pr-5">
-                        <div className="flex flex-row md:flex-col justify-start w-full gap-2.5 md:gap-5">
-                                <Button
-                                  color="blue_gray_100"
-                                  size="sm"
-                                  variant="outline"
-                                  shape="round"
-                                  leftIcon={<Img src="images/img_icon_gray_700.svg" alt="icon / 16px / close" />}
-                                  className="gap-2 font-semibold min-w-[90px] w-[12px]"
-                                  style={{width:5, fontSize:10}}
-                                >
-                                  {datas.Bedrooms }-Bedrooms 
-                                </Button>
-                                <Button
-                                  color="blue_gray_100"
-                                  size="sm"
-                                  variant="outline"
-                                  shape="round"
-                                  leftIcon={<Img src="images/img_icon_gray_700_20x20.svg" alt="icon / 16px / close" />}
-                                  className="gap-2 font-semibold min-w-[100px] w-[12px]"
-                                  style={{width:5, fontSize:10}}
-                                >
-                                  {datas.Bathrooms }-Bathrooms
-                                </Button>
-                              
-                                <Button
-                                  color="blue_gray_100"
-                                  size="sm"
-                                  variant="outline"
-                                  shape="round"
-                                  leftIcon={<Img src="images/img_icon_gray_700.svg" alt="icon / 16px / close" />}
-                                  className="gap-2 font-semibold min-w-[70px] w-[12px]"
-                                  style={{width:5, fontSize:10}}
-                                >
-                                  {datas.Bedrooms }-Sqr. 
-                                </Button>
-                                <Button
-                                  color="blue_gray_100"
-                                  size="sm"
-                                  variant="outline"
-                                  shape="round"
-                                  leftIcon={<Img src="images/img_icon_gray_700_20x20.svg" alt="icon / 16px / close" />}
-                                  className="gap-2 font-semibold min-w-[65px] w-[12px]"
-                                  style={{width:5, fontSize:10}}
-                                >
-                                  {datas.Bathrooms }-Suite
-                                </Button>
-                              </div>
-                             
-                          {/* <Button className="h-[48px] px-[31px] sm:px-5 text-white-A700 text-base font-semibold bg-gray-900 min-w-[156px] rounded-[10px]">
-                            {viewDetails}
-                          </Button>
-                          <Heading size="2xl" as="h6" className="tracking-[-0.48px]">
-                            {price}
-                          </Heading> */}
-                        </div>
-                        
-                        
-                      </div>
-                    </div>
-                    </Link></div>
-                  )
-                })
-              }
+              <br/><br/>
+    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth: column.minWidth }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => {
+                return (
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                    {columns.map((column) => {
+                      const value = row[column.id];
+                      return (
+                        <TableCell key={column.id} align={column.align}>
+                          {column.format && typeof value === 'number'
+                            ? column.format(value)
+                            : value}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
+
+
+
                 {/* <LandingPageCard className="flex flex-col items-center justify-start w-[32%] md:w-full" />
                 <LandingPageCard
                   imageOne="images/img_image_1.png"

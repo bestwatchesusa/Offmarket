@@ -14,6 +14,7 @@ import Icon1 from "../../assets/images/Icon1.png";
 import Icon2 from "../../assets/images/icon2.png";
 import Icon3 from "../../assets/images/Icon3.png";
 import Icon4 from "../../assets/images/Icon4.png";
+import { Link } from "react-router-dom";
 import { SearchOutlined, FacebookOutlined,XOutlined,InstagramOutlined,TikTokOutlined} from '@ant-design/icons';
 
 export default function LandingPagePage() {
@@ -193,12 +194,13 @@ export default function LandingPagePage() {
                   />
                  <div className="flex flex-col items-center justify-start w-full gap-[8px]">
                     <Heading size="2xl" as="h4" style={{color:'#008080', marginRight:'140px'}} className="!text-blue-A700 tracking-[-0.48px]" >
-                      Sellers Finance Deals
+                    Sub To Deals
                     </Heading>
                     <Text as="p" className="!text-dark-900">
                     9 Easy-to-Ambitious DIY Projects to Improve Your Home
                 </Text>
                     <div className="flex flex-row justify-start items-center w-full gap-2" >
+                    <Link to={'/subDeals'} className="flex flex-row justify-start items-center w-full gap-2" >
                       <Heading size="md" as="h6" className="mt-px " style={{color:'#008080'}}>
                         View Listings
                       </Heading>
@@ -206,7 +208,7 @@ export default function LandingPagePage() {
                         src="images/img_icon_24px_v_deep_orange_400.svg"
                         alt="icon24pxv_one"
                         className="h-[24px] w-[24px]"
-                      />
+                      /></Link>
                     </div>
                   </div>
                 </div>
@@ -218,12 +220,13 @@ export default function LandingPagePage() {
                   />
                     <div className="flex flex-col items-center justify-start w-full gap-[8px]">
                     <Heading size="2xl" as="h4" style={{color:'#008080', marginRight:'140px'}} className="!text-blue-A700 tracking-[-0.48px]" >
-                      Sellers Finance Deals
+                    Sales Properties
                     </Heading>
                     <Text as="p" className="!text-dark-900">
                     9 Easy-to-Ambitious DIY Projects to Improve Your Home
                 </Text>
                     <div className="flex flex-row justify-start items-center w-full gap-2" >
+                    <Link to={'/listing'} className="flex flex-row justify-start items-center w-full gap-2" >
                       <Heading size="md" as="h6" className="mt-px " style={{color:'#008080'}}>
                         View Listings
                       </Heading>
@@ -231,7 +234,7 @@ export default function LandingPagePage() {
                         src="images/img_icon_24px_v_deep_orange_400.svg"
                         alt="icon24pxv_one"
                         className="h-[24px] w-[24px]"
-                      />
+                      /></Link>
                     </div>
                   </div>
                 </div>
@@ -243,12 +246,14 @@ export default function LandingPagePage() {
                   />
                   <div className="flex flex-col items-center justify-start w-full gap-[8px]">
                     <Heading size="2xl" as="h4" style={{color:'#008080', marginRight:'140px'}} className="!text-blue-A700 tracking-[-0.48px]" >
-                      Sellers Finance Deals
+                    Seller Finance Deals
                     </Heading>
                     <Text as="p" className="!text-dark-900">
                     9 Easy-to-Ambitious DIY Projects to Improve Your Home
                 </Text>
+              
                     <div className="flex flex-row justify-start items-center w-full gap-2" >
+                    <Link to={'/sellerFinance'} className="flex flex-row justify-start items-center w-full gap-2" >
                       <Heading size="md" as="h6" className="mt-px " style={{color:'#008080'}}>
                         View Listings
                       </Heading>
@@ -257,7 +262,9 @@ export default function LandingPagePage() {
                         alt="icon24pxv_one"
                         className="h-[24px] w-[24px]"
                       />
+                       </Link>
                     </div>
+                   
                   </div>
                 </div>
               </div>

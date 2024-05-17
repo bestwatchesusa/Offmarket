@@ -2,7 +2,48 @@ import React from "react";
 import { CloseSVG } from "../../assets/images";
 import deal from "../../assets/images/BESTPROPERTIES.png";
 import { Button, Input, Img, Heading, Text } from "..";
+import { Link } from "react-router-dom";
+import { DownOutlined } from '@ant-design/icons';
+import { Dropdown, Space } from 'antd';
 
+const items = [
+  {
+    key: '1',
+    label: (
+      <Link to={'/profile'} >
+        User Profile
+      </Link>
+    ),
+  },
+  {
+    key: '2',
+    label: (
+      <Link to={'/offer'}>
+        Offer Sent
+      </Link>
+    ),
+   
+
+  },
+  {
+    key: '3',
+    label: (
+      <Link to={'/saved'}>
+       Saved Properties
+      </Link>
+    ),
+  
+  },
+  {
+    key: '4',
+    danger: true,
+    label: (
+      <Link to={''}>
+       Logo Out
+      </Link>
+    ),
+  },
+];
 export default function Header({ ...props }) {
   const [searchBarValue1, setSearchBarValue1] = React.useState("");
   const [open, setOpen] = React.useState(false);
@@ -16,10 +57,11 @@ export default function Header({ ...props }) {
     
 <div className="flex flex-row md:flex-col justify-between items-center w-full mx-auto md:gap-10 md:px-5 max-w-[1200px]">
         <div className="flex flex-row justify-start items-start gap-[11px]">
+        <Link to={'/'}>
           <Img src={deal} alt="Best Off Market Deal" className="h-[60px] w-[80px]" />
           {/* <Text size="md" as="p" className="mt-[5px] !text-orange-A700 !font-markoone">
             Best Off Market Deal
-          </Text> */}
+          </Text> */}</Link>
         </div>
         <div className="flex flex-row sm:flex-col justify-between items-center w-[59%] md:w-full sm:gap-10">
           <div className="flex flex-row w-[94%] sm:w-full gap-10" >
@@ -31,42 +73,56 @@ export default function Header({ ...props }) {
           <Heading as="h6">CONTACT US</Heading> */}
         </div>
         <div className="flex flex-row justify-start items-center w-[19%] md:w-full gap-2.5">
-
         {localStorage.getItem('userdetail') ? (
                                         <>
-                                                          <Img src="images/user.png" alt="arrowdown_one" className="h-[40px] w-[40px]" />
-                                                          <a onClick={() => (setFlyerTwo(!flyerTwo), setFlyer(false))}  alt="arrowdown_one" className="h-[25px] w-[85px]" > <Heading as="h6" >Hi Freeman</Heading>
-                                                          </a> 
-              <svg
-                      className={
-                        flyerTwo === true
-                          ? "transform rotate-180 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500 transition ease-out duration-200"
-                          : "ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                      }
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>   
+                                                         <Dropdown
+                  menu={{
+                    items,
+                  }}
+                >
+
+                  <a href="" onClick={(e) => e.preventDefault()}>
+                    <Space>
+
+                      <Img src="images/user.png" alt="arrowdown_one" className="h-[40px] w-[40px]" />
+                      <a onClick={() => (setFlyerTwo(!flyerTwo), setFlyer(false))} alt="arrowdown_one" className="h-[25px] w-[85px]" > <Heading as="h6" style={{ color: 'black' }}>Hi Freeman</Heading>
+                      </a>
+                      <svg
+                        className={
+                          flyerTwo === true
+                            ? "transform rotate-180 ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500 transition ease-out duration-200"
+                            : "ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                        }
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+
+                    </Space>
+                  </a>
+
+                </Dropdown> 
 
                     
                     
                                         </>
                                     ) : (
                                    <>
-                                   <a  className="sm:px-5 font-semibold min-w-[94px]" style={{ color:'black'}}>
+                                   <Link to={'signup'}  className="sm:px-5 font-semibold min-w-[94px]" style={{ color:'black'}}>
             SIGN UP
-          </a>
+          </Link>
        
-          <Button size="lg" shape="round" className="sm:px-5 font-semibold min-w-[94px]" style={{ backgroundColor:'#008080'}}>
-            LOG IN
+          <Button size="lg" shape="round" className="sm:px-5 font-semibold min-w-[94px]" style={{ backgroundColor:'#008080',color:'#ffff'}}>
+           <Link to={'/login'}>LOG IN</Link>
           </Button>
+             
                                    </>
                                     )}
   

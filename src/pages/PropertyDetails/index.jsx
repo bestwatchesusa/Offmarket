@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React,{ useState, useContext,useEffect } from 'react';
 import { Modal,message, Steps, theme,Input ,Flex } from 'antd';
 import { Helmet } from "react-helmet";
 import { Img, Heading, Button, TextArea, Radio, RadioGroup, Text, RatingBar, GoogleMap } from "../../components";
 import Footer from "../../components/Footer";
+import { Link } from "react-router-dom";
 import Header from "../../components/Header2";
 import LandingPageCard from "../../components/LandingPageCard";
 import { AppstoreFilled } from '@ant-design/icons';
@@ -19,55 +20,51 @@ import Four from "./FourStep";
 // import Fift from "./SixStep";
 // import Confirm from "./Confirm";
 import Success from "./success";
-import Grid from "@mui/material/Grid";
-// import { Button,  } from 'antd';
-// const steps = [
-//   {
-//     title: 'Offer Details',
-//     content: 'First-content',
-//   },
-//   {
-//     title: 'Proof of funds',
-//     content: 'Second-content',
-//   },
-//   {
-//     title: 'Acceptance',
-//     content: 'Last-content',
-//   },
-// ];
-// const labels = ["Contact details", "Property details", "Property details", "Upload Property Pictures", "Other Details details"];
-// const handleSteps = (step) => {
-  // switch (step) {
-  //   case 0:
-  //     return <FirstStep />;
-  //   case 1:
-  //     return <SecondStep />;
-  //   case 2:
-  //     return <Third />;
-  //   case 3:
-  //     return <Four />;
-  //   // case 4:
-  //   //   return <Fift />;
-  //   // case 5:
-  //   //   return <Confirm />;
-  //   default:
-  //     throw new Error("Unknown step");
-//   }
+import One from '../../assets/images/img_icon_gray_700.svg'
+import Two from '../../assets/images/img_rectangle_5610.png'
+import Img1 from '../../assets/images/img_rectangle_5612.png'
+import Img2 from '../../assets/images/img_rectangle_5611.png'
+import Img3 from '../../assets/images/img_icon_gray_700_20x20.svg'
+import Img4 from '../../assets/images/img_icon_gray_700_20x20.svg'
+import Img5 from '../../assets/images/left-arrow.png'
+import Img6 from '../../assets/images/img_image_2.png'
+import Img7 from '../../assets/images/icons8-power-50.png'
+import Img8 from '../../assets/images/icons8-share-64.png'
+import Img9 from '../../assets/images/icons8-heart-50.png'
+import Img10 from '../../assets/images/img_icon_gray_700_20x20.svg'
+import Img11 from '../../assets/images/img_icon_gray_700.svg'
+import Img12 from '../../assets/images/img_icon_gray_700_20x20.svg'
+import {
 
-
-// };
-
-// import Box from '@mui/material/Box';
-// import Stepper from '@mui/material/Stepper';
-// import Step from '@mui/material/Step';
-// import StepLabel from '@mui/material/StepLabel';
-// import Button from '@mui/material/Button';
-// import Typography from '@mui/material/Typography';
-
+  useParams
+} from "react-router-dom";
+import { AuthContext } from '../../context/AuthContext';
 const steps = ['Offer Details', 'Proof of funds', 'Acceptance'];
 
 
 export default function PropertyDetailsPage() {
+
+  let { id } = useParams();
+ 
+  const [payments, setPayment] = useState([]);
+
+  const [payments2, setPayment2] = useState([]);
+  const { getProperty } = useContext(AuthContext);
+  useEffect(() => {
+    const fetchRequests = async () => {
+      const data = await getProperty();
+      setPayment2(data);
+      const servePro = data.filter(i => i.id === id );
+      console.log("goal 666=====",data)
+      setPayment(servePro[0]);
+      console.log("goal 666===@@@==",servePro[0])
+    };
+   
+    fetchRequests();
+
+  
+  }, [])
+
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
 
@@ -270,6 +267,8 @@ const handleSteps = (step) => {
   const handleCancel3 = () => {
     setIsModalOpen3(false);
   };
+
+  
   return (
     <>
       <Helmet>
@@ -286,7 +285,7 @@ const handleSteps = (step) => {
             
             <div className="flex flex-row justify-between w-full">
               <div className="flex flex-row justify-start items-center gap-3">
-              <Img src="images/left-arrow.png" alt="1_bath_one" className="h-[15px] w-[15px]" />
+              <Img src={Img5} alt="1_bath_one" className="h-[15px] w-[15px]" />
                 <Heading as="h2" className="!text-dark-700" style={{color:'dark'}}>
                 Back to Search
                 </Heading>
@@ -298,6 +297,12 @@ const handleSteps = (step) => {
           
           </div>
           </div>
+
+    
+
+
+<div >
+
           <div className="flex flex-row justify-center w-full">
             <div className="flex flex-row md:flex-col justify-start w-full gap-6 md:gap-5 md:px-5 max-w-[1200px]">
             
@@ -305,7 +310,9 @@ const handleSteps = (step) => {
               <div className="flex flex-row justify-start items-center gap-3">
                 {/* <Img src="images/img_icon_gray_700.svg" alt="3_bed_room_one" className="h-[20px] w-[20px]" /> */}
                 <Heading as="h1"  style={{color:'black',fontWeight:"500px", fontSize:25}}>
-                Seaside Haven House
+
+                {payments.Title}
+
                 </Heading>
              
               </div>
@@ -315,6 +322,7 @@ const handleSteps = (step) => {
           
           </div>
           </div>
+          <br/><br/>
           <div className="flex flex-row justify-center w-full -mt-10">
             <div className="flex flex-row md:flex-col justify-start w-full gap-6 md:gap-5 md:px-5 max-w-[1200px]">
             
@@ -322,7 +330,7 @@ const handleSteps = (step) => {
               <div className="flex flex-row justify-start items-center gap-3">
                 {/* <Img src="images/img_icon_gray_700.svg" alt="3_bed_room_one" className="h-[20px] w-[20px]" /> */}
                 <Heading as="h6" className="!text-gray-500" style={{color:'grey', fontSize:14}}>
-                37 Elm Drive, Nashville, TN 
+                {payments.Address}
                 </Heading>
              
               </div>
@@ -330,7 +338,7 @@ const handleSteps = (step) => {
           </div>
           </div>
 
-
+          <br/><br/>
           <div className="flex flex-row justify-center w-full -mt-[26px] ">
             <div className="flex flex-row md:flex-col justify-start w-full gap-3 md:gap-5 md:px-5 max-w-[1200px]">
             
@@ -338,34 +346,35 @@ const handleSteps = (step) => {
 
             <div className="flex flex-row justify-between w-full">
               <div className="flex flex-row justify-start items-center gap-3">
-               <Img src="images/img_icon_gray_700.svg" alt="1_bath_one" className="h-[15px] w-[15px]" /> <span> 5</span> &nbsp;
-                <Img src="images/img_icon_gray_700_20x20.svg" alt="1_bath_one" className="h-[15px] w-[15px]" /><span> 3</span>  &nbsp;
-                <Img src="images/img_icon_gray_700_20x20.svg" alt="1_bath_one" className="h-[15px] w-[15px]" /><span> 2</span>  &nbsp; |  &nbsp; Residential
+               <img src={One} alt="1_bath_one" className="h-[15px] w-[15px]" /> <span> 5</span> &nbsp;
+                <Img src={Img3} alt="1_bath_one" className="h-[15px] w-[15px]" /><span> 3</span>  &nbsp;
+                <Img src={Img4} alt="1_bath_one" className="h-[15px] w-[15px]" /><span> 2</span>  &nbsp; |  &nbsp; Residential
               </div>
             </div>
           
           </div>
           </div>
+          <br/>
             <div className="flex flex-row justify-center w-full">
               
               <div className="flex flex-row md:flex-col justify-start w-full gap-6 md:gap-5 md:px-5 max-w-[1200px]">
                
                 <div className="flex flex-row justify-start w-[66%] md:w-full">
                   <Img
-                    src="images/img_rectangle_5610.png"
+                  src={Two}
                     alt="image"
                     className="w-full md:h-auto sm:w-full object-cover rounded-[10px]"
                   />
                 </div>
                 <div className="flex flex-col items-center justify-start w-[32%] md:w-full gap-6">
                   <Img
-                    src="images/img_rectangle_5611.png"
+                    src={Img2}
                     alt="image_one"
                     className="w-full md:h-auto sm:w-full object-cover rounded-[10px]"
                   />
                   <div className="h-[263px] w-full relative">
                     <Img
-                      src="images/img_rectangle_5612.png"
+                      src={Img1}
                       alt="image_two"
                       className="justify-center h-[263px] w-full sm:w-full left-0 bottom-0 right-0 top-0 m-auto object-cover absolute rounded-[10px]"
                     />
@@ -400,34 +409,16 @@ const handleSteps = (step) => {
                         </Heading>
 
                         <Text as="p" style={{fontSize:14, color:'black'}}>
-                        A slider is great way to display a slideshow featuring images or videos, usually on your
-                        homepage.Adding sliders to your site is no longer difficult. You don’t have to know coding
-                        anymore. Just use a slider widget and it will automatically insert the slider on your web
-                        page.So, the Elementor slider would be a great tool to work with when building a WordPress site.
+   
+                      {payments.Description}
                       </Text>
 
-                      <Text as="p" style={{fontSize:14, color:'black'}}>
-                        A slider is great way to display a slideshow featuring images or videos, usually on your
-                        homepage.Adding sliders to your site is no longer difficult. You don’t have to know coding
-                        anymore. Just use a slider widget and it will automatically insert the slider on your web
-                        page.So, the Elementor slider would be a great tool to work with when building a WordPress site.
-                      </Text>
-                      <Text as="p" style={{fontSize:14, color:'black'}}>
-                        A slider is great way to display a slideshow featuring images or videos, usually on your
-                        homepage.Adding sliders to your site is no longer difficult. You don’t have to know coding
-                        anymore. Just use a slider widget and it will automatically insert the slider on your web
-                        page.So, the Elementor slider would be a great tool to work with when building a WordPress site.
-                      </Text>
-                        {/* <Heading size="3xl" as="h1" className="tracking-[-0.56px]">
-                          Trovilla Plan in Sereno Canyon - Estate Collection by Toll Brothers
-                        </Heading>
-                        <Heading size="lg" as="h2" className="tracking-[-0.40px]">
-                          2861 62nd Ave, Oakland, CA 94605
-                        </Heading> */}
+                     
+                   
                       </div>
                      
                     </div>
-                    <div className="flex flex-col items-start justify-start w-full gap-[17px]">
+                    {/* <div className="flex flex-col items-start justify-start w-full gap-[17px]">
                     <Heading size="3xl" as="h3" className="tracking-[-0.56px]">
                           Tips
                         </Heading>
@@ -437,7 +428,7 @@ const handleSteps = (step) => {
                         anymore. Just use a slider widget and it will automatically insert the slider on your web
                         page.So, the Elementor slider would be a great tool to work with when building a WordPress site.
                       </Text>
-                    </div>
+                    </div> */}
                  
                   </div>
                   
@@ -447,7 +438,7 @@ const handleSteps = (step) => {
                   <div className="flex flex-col items-start justify-start w-full pt-[3px] gap-[19px]">
                     price
                     <Heading size="3xl" as="h3" className="tracking-[-0.56px]" style={{color:'#008080',fontWeight:'bold'}}>
-                      $ 100,0000
+                    {payments.Price}
                     </Heading>
                     {/* <div className="flex flex-col items-center justify-start w-full gap-3"> */}
                   
@@ -467,7 +458,7 @@ const handleSteps = (step) => {
                 </Heading>
               </div>
               <div className="flex flex-row justify-start items-center gap-3" style={{fontWeight:'bold'}}>
-2200
+              {payments['Sq. Footage']}
               </div>
             </div>
          
@@ -481,7 +472,7 @@ const handleSteps = (step) => {
                 </Heading>
               </div>
               <div className="flex flex-row justify-start items-center gap-3" style={{fontWeight:'bold'}}>
-Single Family
+              {payments.Type}
               </div>
             </div>
          
@@ -495,7 +486,7 @@ Single Family
                 </Heading>
               </div>
               <div className="flex flex-row justify-start items-center gap-3" style={{fontWeight:'bold'}}>
-Driveway
+              {payments.Parking}
               </div>
             </div>
          
@@ -509,7 +500,7 @@ Driveway
                 </Heading>
               </div>
               <div className="flex flex-row justify-start items-center gap-3" style={{fontWeight:'bold'}}>
-2021
+              {payments['Year build']}
               </div>
             </div>
          
@@ -523,7 +514,7 @@ Driveway
                 </Heading>
               </div>
               <div className="flex flex-row justify-start items-center gap-3" style={{fontWeight:'bold'}}>
-              0.23 acres
+              {payments['Lot size']}
               </div>
             </div>
          
@@ -537,7 +528,7 @@ Driveway
                 </Heading>
               </div>
               <div className="flex flex-row justify-start items-center gap-3" style={{fontWeight:'bold'}}>
-6
+              {payments.Bedrooms}
               </div>
             </div>
          
@@ -551,12 +542,12 @@ Driveway
                 </Heading>
               </div>
               <div className="flex flex-row justify-start items-center gap-3" style={{fontWeight:'bold'}}>
-3
+              {payments.Bathrooms}
               </div>
             </div>
          
                     </div>
-                    <div className="flex flex-col items-center justify-start w-full gap-[19px]">
+                    {/* <div className="flex flex-col items-center justify-start w-full gap-[19px]">
             <div className="flex flex-row justify-between w-full">
               <div className="flex flex-row justify-start items-center gap-3">
               <AppstoreFilled style={{color:'#008080'}} />
@@ -565,11 +556,11 @@ Driveway
                 </Heading>
               </div>
               <div className="flex flex-row justify-start items-center gap-3" style={{fontWeight:'bold'}}>
-2
+             
               </div>
             </div>
          
-                    </div>
+                    </div> */}
                   </div>
                   <Button onClick={showModal} size="2xl" shape="round" style={{background:'#008080'}} className="w-full sm:px-5 font-semibold">
                     Make Offer
@@ -579,7 +570,10 @@ Driveway
             </div>
           </div>
 
-          
+          </div> 
+         
+
+          {/* ********************************** */}
           <div className="flex flex-row justify-center w-full">
             <div className="flex flex-col items-center justify-start w-full gap-[39px] md:px-5 max-w-[1200px]">
               <div className="flex flex-row sm:flex-col justify-between items-start w-full pt-[3px] sm:gap-10">
@@ -595,15 +589,143 @@ Driveway
                 </div>
               </div>
               <div className="flex flex-row md:flex-col w-full gap-6">
-                <LandingPageCard className="flex flex-col items-center justify-start w-[32%] md:w-full" />
-                <LandingPageCard
-                  imageOne="images/img_image_1.png"
-                  className="flex flex-col items-center justify-start w-[32%] md:w-full"
-                />
-                <LandingPageCard
-                  imageOne="images/img_image_2.png"
-                  className="flex flex-col items-center justify-start w-[32%] md:w-full"
-                />
+              {
+                payments2.map((datas, i) => {
+                  console.log(datas.Price,"Goal")
+                  return (
+<div className="flex flex-col items-center justify-start w-[32%] md:w-full">
+                    <Link to={'/propertydetails'} key={i}>
+                    <Img
+                      src={Img6}
+                      alt="image_one"
+                      className="w-full md:h-auto sm:w-full rounded-tr-[10px] rounded-tl-[10px] object-cover"
+                    />
+                    <div className="flex flex-row justify-center w-full p-[19px] rounded-bl-[10px] rounded-br-[10px] border-red-100_01 border border-solid bg-gray-50_01">
+                      <div className="flex flex-col items-center justify-start w-full gap-[25px] my-2.5 md:px-5 max-w-[344px]">
+                        <div className="flex flex-row justify-start items-center w-full gap-3 ">
+                          <div className="absolute">
+                          {/* <Img src="images/img_icon_map_2.svg" alt="image_two" className="h-[24px] w-[24px] " /> */}
+                          <Button
+                                    color="white_A700"
+                                    size="lg"
+                                    shape="round"
+                                 
+                                    className="gap-1.5 -top-[130px] left-[5px] m-auto text-gray-900 font-bold min-w-[122px] absolute"
+                                  >
+                                     {/* {price} */}
+                                     {datas.Price}
+                                  </Button>
+                                  <Button
+                                    color="white_A700"
+                                    size="lg"
+                                    shape="round"
+                                    leftIcon={<Img src={Img7} alt="icon - image" style={{width:18}}/>}
+                                    className="gap-1.5 -top-[260px] left-[5px] m-auto text-gray-900 font-bold min-w-[122px] absolute"
+                                  style={{background:'#008080',color:'#fff',fontSize:'12px'}}
+                                  >
+                                    FEATURED
+                                  </Button>
+                          </div>
+                         
+                          <Heading as="h1">
+                            {/* {p286162ndave} */}
+                            {datas.Title}
+                          </Heading>
+                      
+                        </div>
+                        <div className="flex flex-col items-center justify-start w-full gap-[19px]">
+                          <div className="flex flex-row justify-between w-full">
+                            <div className="flex flex-row justify-start items-center gap-3">
+                              {/* <Img src="images/img_icon_gray_700.svg" alt="3_bed_room_one" className="h-[20px] w-[20px]" /> */}
+                              <Heading as="h2" className="!text-gray-700">
+                              {datas.Address}
+                              </Heading>
+                            </div>
+                            <div className="flex flex-row justify-start items-center gap-3">
+                              <Img src={Img8} alt="1_bath_one" className="h-[20px] w-[20px]" />
+                              <Img src={Img9}alt="1_bath_one" className="h-[20px] w-[20px]" />
+                            </div>
+                          </div>
+                          {/* <div className="flex flex-row justify-between w-full">
+                            <div className="flex flex-row justify-start items-center gap-3">
+                              <Img src="images/img_icon_20x20.svg" alt="1032_sqft_one" className="h-[20px] w-[20px]" />
+                              <Heading as="h4" className="!text-gray-700">
+                                {sqftcounter}
+                              </Heading>
+                            </div>
+                            <div className="flex flex-row justify-start items-center gap-3">
+                              <Img src="images/img_iocn_menu.svg" alt="family_one" className="h-[20px] w-[20px]" />
+                              <Heading as="h5" className="!text-gray-700">
+                                {p1bath}
+                              </Heading>
+                            </div>
+                          </div> */}
+                        </div>
+              
+                        <div className="flex flex-row justify-between items-center w-full pr-[47px] md:pr-5">
+                        <div className="flex flex-row md:flex-col justify-start w-full gap-2.5 md:gap-5">
+                                <Button
+                                  color="blue_gray_100"
+                                  size="sm"
+                                  variant="outline"
+                                  shape="round"
+                                  leftIcon={<Img src={Img11} alt="icon / 16px / close" />}
+                                  className="gap-2 font-semibold min-w-[90px] w-[12px]"
+                                  style={{width:5, fontSize:10}}
+                                >
+                                  {datas.Bedrooms }-Bedrooms 
+                                </Button>
+                                <Button
+                                  color="blue_gray_100"
+                                  size="sm"
+                                  variant="outline"
+                                  shape="round"
+                                  leftIcon={<Img src={Img10} alt="icon / 16px / close" />}
+                                  className="gap-2 font-semibold min-w-[100px] w-[12px]"
+                                  style={{width:5, fontSize:10}}
+                                >
+                                  {datas.Bathrooms }-Bathrooms
+                                </Button>
+                              
+                                <Button
+                                  color="blue_gray_100"
+                                  size="sm"
+                                  variant="outline"
+                                  shape="round"
+                                  leftIcon={<Img src={Img11}alt="icon / 16px / close" />}
+                                  className="gap-2 font-semibold min-w-[70px] w-[12px]"
+                                  style={{width:5, fontSize:10}}
+                                >
+                                  {datas.Bedrooms }-Sqr. 
+                                </Button>
+                                <Button
+                                  color="blue_gray_100"
+                                  size="sm"
+                                  variant="outline"
+                                  shape="round"
+                                  leftIcon={<Img src={Img12}alt="icon / 16px / close" />}
+                                  className="gap-2 font-semibold min-w-[65px] w-[12px]"
+                                  style={{width:5, fontSize:10}}
+                                >
+                                  {datas.Bathrooms }-Suite
+                                </Button>
+                              </div>
+                             
+                          {/* <Button className="h-[48px] px-[31px] sm:px-5 text-white-A700 text-base font-semibold bg-gray-900 min-w-[156px] rounded-[10px]">
+                            {viewDetails}
+                          </Button>
+                          <Heading size="2xl" as="h6" className="tracking-[-0.48px]">
+                            {price}
+                          </Heading> */}
+                        </div>
+                        
+                        
+                      </div>
+                    </div>
+                    </Link></div>
+                  )
+                })
+              }
               </div>
             </div>
           </div>

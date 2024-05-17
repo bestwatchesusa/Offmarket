@@ -14,6 +14,13 @@ import Login from "pages/Login";
 import Submit from "pages/Submit";
 import Profile from "pages/Dashboard";
 import Offer from "pages/Dashboard/Offer";
+import Saved from "pages/Dashboard/Saved";
+
+import MultiFamily from "pages/MultiFamily";
+import Residential from "pages/Residential";
+import SellerFinanc from "pages/SellerFinance";
+import SubDeals from "pages/SubDeals";
+
 const ProjectRoutes = () => {
   let element = useRoutes([
 
@@ -21,6 +28,22 @@ const ProjectRoutes = () => {
     {
       path: "/",
       element: <LandingPage />,
+    },
+    {
+      path: "/multiFamily",
+      element: <MultiFamily />,
+    },
+    {
+      path: "/residential",
+      element: <Residential />,
+    },
+    {
+      path: "/sellerFinance",
+      element: <SellerFinanc />,
+    },
+    {
+      path: "/subDeals",
+      element: <SubDeals />,
     },
     {
       path: "aboutus",
@@ -47,11 +70,11 @@ const ProjectRoutes = () => {
       element: <UserDashboard />,
     },
     {
-      path: "listingmapview",
+      path: "all",
       element: <ListingMapView />,
     },
     {
-      path: "propertydetails",
+      path: "propertydetails/:id",
       element: <PropertyDetails />,
     },
     {
@@ -65,6 +88,10 @@ const ProjectRoutes = () => {
     {
       path: "submit",
       element: <Submit/>,
+    },
+    {
+      path: "saved",
+      element: <Saved/>,
     },
   ]);
 
